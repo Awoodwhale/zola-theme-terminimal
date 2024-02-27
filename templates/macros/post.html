@@ -16,9 +16,51 @@
 </div>
 {% else %}
 {#- full content -#}
-<div class="post-content">
+
+<div class="toc-container"><div class="toc"></div></div>
+<style>.toc-container {
+    width: 200px;
+    height: auto;
+    z-index: 114;
+    background-color: var(--background);
+    transform: translateX(0);
+    right: calc((100% - 950px - 250px) / 2);
+    position: fixed;
+    top:50hv;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.toc-container .is-active-link {
+    color: var(--accent);
+    font-weight: 1000;
+}
+
+.toc-container ol li::marker  {
+    content: "# " !important;
+    color: var(--accent);
+}
+.toc-container ol li a {
+    text-decoration: none;
+}
+.toc-container ol li a:hover {
+    color: var(--accent);
+}</style>
+<div class="post-content" id="uniq-post-content">
     {{ page.content | safe }}
 </div>
+<script>
+tocbot.init({
+    tocSelector: '.toc',
+    contentSelector: '.post-content',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    positionFixedSelector: ".toc",
+})
+new Viewer(document.getElementById('uniq-post-content'), {
+    navbar: false,
+    loop: false,
+    title: false,
+})
+</script>
 {%- endif %}
 {% endmacro content %}
 
