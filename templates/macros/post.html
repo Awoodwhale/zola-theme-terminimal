@@ -26,9 +26,7 @@
     transform: translateX(0);
     right: calc((100% - 950px - 250px) / 2);
     position: fixed;
-    top:50hv;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    top: 25%;
 }
 .toc-container .is-active-link {
     color: var(--accent);
@@ -54,8 +52,7 @@ tocbot.init({
     contentSelector: '.post-content',
     headingSelector: 'h1, h2, h3, h4, h5',
     positionFixedSelector: ".toc",
-})
-new Viewer(document.getElementById('uniq-post-content'), {
+}) && new Viewer(document.getElementById('uniq-post-content'), {
     navbar: false,
     loop: false,
     title: false,
