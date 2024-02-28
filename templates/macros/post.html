@@ -26,14 +26,13 @@
     transform: translateX(0);
     right: calc((100% - 950px - 250px) / 2);
     position: fixed;
-    top: 25%;
+    top: 23%;
 }
 .toc-container .is-active-link {
     color: var(--accent);
     font-weight: 1000;
 }
-
-.toc-container ol li::marker  {
+.toc-container ol li::before  {
     content: "# " !important;
     color: var(--accent);
 }
@@ -42,7 +41,16 @@
 }
 .toc-container ol li a:hover {
     color: var(--accent);
-}</style>
+}
+.toc{overflow-y:auto}
+.toc>.toc-list{overflow:hidden;position:relative}
+.toc>.toc-list li{list-style:none}
+.js-toc{overflow-y:hidden}
+.toc-list{margin:0;padding-left:10px}
+.is-collapsible{max-height:1000px;overflow:hidden;transition:all 300ms ease-in-out}
+.is-collapsed{max-height:0}
+.is-position-fixed{position:fixed !important;top:0}
+</style>
 <div class="post-content" id="uniq-post-content">
     {{ page.content | safe }}
 </div>
