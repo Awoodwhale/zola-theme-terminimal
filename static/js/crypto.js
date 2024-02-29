@@ -19,4 +19,5 @@ function decryptContent(hash) {
     }
     document.getElementById(`secret-content-${hash}`).remove()
     document.getElementById(`decrypted-content-${hash}`).innerHTML += marked.parse(res)
+    tocbot.refresh()
 }
