@@ -1,11 +1,11 @@
 name = "terminimal"
 description = "A simple, minimal retro theme"
 license = "MIT"
-homepage = "https://github.com/pawroman/zola-theme-terminimal"
+homepage = "https://github.com/awoodwhale/zola-theme-terminimal"
 min_version = "0.11.0"
 
 # An optional live demo URL
-demo = "https://pawroman.github.io/zola-theme-terminimal/"
+demo = "https://www.woodwhale.cn"
 
 [author]
 name = "Paweł Romanowski"
@@ -45,3 +45,17 @@ post_view_navigation_prompt = "Thanks for reading! Read other posts?"
 # Switch this to true if you need full unicode support.
 # Defaults to false.
 use_full_hack_font = false
+
+# Friend links config
+# [[extra.links]]
+# tag = "coder"
+# name = "woodwhale"
+# site = "https://www.woodwhale.cn"
+# avatar = "https://www.woodwhale.cn/woodwhale.png"
+# sign = "A Happy WoodWhale!"
+# [[extra.links]]
+# tag = "tester"
+# name = "test"
+# site = "https://www.test.com"
+# avatar = "https://www.test.com/avatar.png"
+# sign = "This is a test case!"
