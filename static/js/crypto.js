@@ -12,12 +12,15 @@ function decryptContent(hash) {
     const pwd = document.getElementById(`pwd-${hash}`).value
     const data = document.getElementById(`data-${hash}`).value
     if (!pwd || !data) return
-    const res = aesDecrypt(data, pwd)
-    if (!res) {
-        document.getElementById(`pwd-${hash}`).value = ''
-        return
-    }
-    document.getElementById(`secret-content-${hash}`).remove()
-    document.getElementById(`decrypted-content-${hash}`).innerHTML += marked.parse(res)
-    tocbot.refresh()
+    try {
+        const res = aesDecrypt(data, pwd)
+        if (!res) {
+            document.getElementById(`pwd-${hash}`).value = ''
+            return
+        }
+        const parsed = marked.parse(res)
+        document.getElementById(`secret-content-${hash}`).remove()
+        document.getElementById(`decrypted-content-${hash}`).innerHTML += parsed
+        tocbot.refresh()
+    } catch(_) { return }
 }
