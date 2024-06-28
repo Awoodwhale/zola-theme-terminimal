@@ -2,12 +2,10 @@
 {% set data = load_data(path="encrypt/" ~ src) %}
 {% set hash = get_hash(literal=src, sha_type=256) %}
 
-<div id="secret-content-{{ hash }}">
-    <p><code>{% if msg %}{{ msg }}{% else -%} 以下内容已被加密，请输入密码后查看 {%- endif %}</code></p>
-    <input id="pwd-{{hash}}" class="mo-input" name="password" type="password" autocomplete="new-password"
-        placeholder="password" aria-label="password">
+<div id="secret-content-{{ hash }}" class="secret-content-div">
+    <input id="pwd-{{hash}}" class="mo-input" name="password" type="password" autocomplete="new-password" placeholder="{% if msg %}{{ msg }}{% else -%} 以下内容已被加密，请输入密码后查看 {%- endif %}" aria-label="password">
     <input id="data-{{ hash }}" name="data" type="hidden" value="{{ data }}">
-    <button type="submit" style="display: inline-flex;" onclick="decryptContent('{{hash}}')">解密</button>
+    <div onclick="decryptContent('{{ hash }}')">解密</div>
 </div>
 <div id="decrypted-content-{{ hash }}"></div>
 {% endif %}
