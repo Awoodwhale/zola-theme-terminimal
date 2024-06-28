@@ -18,6 +18,7 @@ input:focus {
     align-items: center;
 }
 .secret-content-div input {
+    height: 40px;
     flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
@@ -28,9 +29,10 @@ input:focus {
     vertical-align: bottom;
 }
 .secret-content-div div {
+    height: 40px;
     border: 1px solid #ccc;
     border-left: none;
-    padding: 7px 15px;
+    padding: 8px 15px;
     border-radius: 0 4px 4px 0;
     background: none;
     color: var(--accent);
