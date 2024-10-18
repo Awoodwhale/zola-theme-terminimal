@@ -3,9 +3,13 @@
         <div class="post-content">
             {{ page.description | safe }}
         </div>
-    {% elif summary and page.summary %}
+    {% elif summary %}
         <div class="post-content">
-            {{ page.summary | safe }}
+            {%- if page.description %}
+                {{ page.description | safe }}
+            {% elif page.summary%}
+                {{ page.summary | safe }}
+            {%- endif %}
         </div>
         <div>
             <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
