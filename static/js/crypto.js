@@ -15,16 +15,15 @@ function decryptContent(hash) {
     try {
         const res = aesDecrypt(data, pwd)
         if (!res) {
-            alertify.error('密码错误!');
+            alertify.error('密码错误')
             document.getElementById(`pwd-${hash}`).value = ''
             return
         }
-        alertify.success('解密成功!')
-        const parsed = marked.parse(res)
+        alertify.success('解密成功')
         document.getElementById(`secret-content-${hash}`).remove()
-        document.getElementById(`decrypted-content-${hash}`).innerHTML += parsed
+        document.getElementById(`decrypted-content-${hash}`).innerHTML += marked.parse(res)
         tocbot.refresh()
-    } catch(_) { 
-        alertify.error('解密失败!');
+    } catch (_) {
+        alertify.error('解密失败')
     }
 }

@@ -20,9 +20,11 @@
         </div>
     {% else %}
         {#- full content -#}
-        <div class="post-content">
+        <div class="toc-container"><div class="toc"></div></div>
+        <div class="post-content" id="uniq-post-content">
             {{ page.content | safe }}
         </div>
+        <script src='{{ get_url(path="js/main.js") }}'></script>
     {%- endif %}
 {% endmacro content %}
 
