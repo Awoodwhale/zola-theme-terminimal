@@ -8,3 +8,15 @@ tocbot.init({
     loop: false,
     title: false,
 })
+
+function toggleSummary() {
+    chevron.classList.contains('rotated') ? collapseSummary() : expandSummary()
+}
+function expandSummary() {
+    content.style.height = `${content.scrollHeight}px`
+    chevron.classList.add('rotated')
+}
+function collapseSummary() {
+    content.style.height = '0'
+    chevron.classList.remove('rotated')
+}
