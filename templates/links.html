@@ -34,7 +34,11 @@
             {% endfor %}
         </div>
     </div>
-
+{%- if not page.extra.no_comment %}
+    {{ comment_macros::comment() }}
+{% endif -%}
 </div>
+
+
 
 {% endblock content %}

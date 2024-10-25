@@ -1,0 +1,28 @@
+{% macro comment() %}
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Comment Below</span>
+        <hr />
+    </div>
+</div>
+<div id="waline-comment"></div>
+<script type="module">
+    import { init } from 'https://cdnjs.cloudflare.com/ajax/libs/waline/3.3.2/waline.min.js'
+    init({
+        el: '#waline-comment',
+        serverURL: 'https://waline-comment.woodwhale.cn',
+        lang: 'zh-CN',
+        locale: { 
+            placeholder: '让我们说中文!',
+            sofa: '暂无评论',
+        },
+        search: false,
+        pageview: false,
+        comment: false,
+        emoji: [
+            'https://unpkg.com/@waline/emojis@1.2.0/tieba',
+        ],
+        dark: 'auto',
+    })
+</script>
+{% endmacro %}
