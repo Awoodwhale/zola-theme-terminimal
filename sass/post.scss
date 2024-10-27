@@ -10,6 +10,7 @@
   text-align: left;
   margin: 20px auto;
   padding: 20px 0;
+  word-wrap: break-word;
 
   @media (max-width: $tablet-max-width) {
     max-width: 660px;
