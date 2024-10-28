@@ -113,9 +113,9 @@
         <span class="post-tags-inline">
             {%- if short %}
                 ::
-                {%- set sep = "," -%}
+                {%- set sep = " " -%}
             {% else %}
-                | tags:
+                tags:
                 {%- set sep = "&nbsp;" -%}
             {% endif -%}
             {%- for tag in page.taxonomies.tags | sort | unique(case_sensitive=false) %}
