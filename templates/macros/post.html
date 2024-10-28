@@ -1,3 +1,5 @@
+{% import "macros/ai_summary.html" as ai_summary_macros -%}
+
 {% macro content(page, summary, show_only_description) %}
     {%- if show_only_description %}
         <div class="post-content">
@@ -21,6 +23,9 @@
     {% else %}
         {#- full content -#}
         <div class="toc-container"><div class="toc"></div></div>
+        {%- if page.extra.ai %}
+            {{ ai_summary_macros::ai_summary(src=page.extra.ai.src, update=page.extra.ai.update, model=page.extra.ai.model)}}
+        {%- endif %}
         <div class="post-content" id="uniq-post-content" data-pagefind-body>
             {{ page.content | safe }}
         </div>

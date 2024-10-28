@@ -1,3 +1,4 @@
+{% macro ai_summary(src, update, model) %}
 {% if src and update and model %}
 {% set data = load_data(path="summary/" ~ src) %}
 <div class="summary-container">
@@ -14,7 +15,7 @@
         </div>
         <div class="summary-content" id="uniq-summary-content">
             <div class="summary-text">
-                <div id="summary-inner-content"></div>
+                <div id="summary-inner-content">{{ data | markdown() | safe }}</div>
                 <div class="summary-info">
                     <div>AI Model: {{ model | safe }}</div>
                     <div>Update At: {{ update | safe }}</div>
@@ -23,15 +24,5 @@
         </div>
     </div>
 </div>
-
-<script>
-const content = document.getElementById('uniq-summary-content')
-const chevron = document.querySelector('.summary-chevron')
-const inner = document.getElementById('summary-inner-content')
-try {
-    inner.innerHTML = marked.parse(`{{ data | safe }}`)
-} catch (_) {
-    inner.innerHTML = 'Markdown-Parser failed to parse the AI-Summary...'
-}
-</script>
 {% endif %}
+{% endmacro %}
