@@ -3,6 +3,10 @@ tocbot.init({
     contentSelector: '.post-content',
     headingSelector: 'h1, h2, h3, h4, h5',
     positionFixedSelector: ".toc",
+    scrollEndCallback: (_) => {
+        const active = document.querySelector('.is-active-link')
+        active && active.scrollIntoView({ behavior: 'auto', block: 'nearest' })
+    }
 })
 new Viewer(document.getElementById('uniq-post-content'), {
     navbar: false,
