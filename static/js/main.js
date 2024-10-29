@@ -26,3 +26,14 @@ function collapseSummary() {
     content.style.height = '0'
     chevron.classList.remove('rotated')
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const codeBlocks = document.querySelectorAll('pre[class^="language-"][data-lang]')
+    codeBlocks.forEach(codeBlock => {
+        codeBlock.addEventListener('click', (_) => {
+            navigator.clipboard.writeText(codeBlock.innerText)
+                .then(() => alertify.success('复制成功'))
+                .catch(err => alertify.error(`复制失败: ${err}`))
+        })
+    })
+})
