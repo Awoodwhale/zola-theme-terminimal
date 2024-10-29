@@ -8,5 +8,9 @@
 @import 'logo';
 @import 'main';
 @import 'post';
+@import 'code';
 @import 'pagination';
 @import 'footer';
+
+@import url("code-dark.css") (prefers-color-scheme: dark);
+@import url("code-light.css") (prefers-color-scheme: light);

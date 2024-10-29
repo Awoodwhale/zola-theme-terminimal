@@ -91,7 +91,7 @@
   ul {
     list-style: none;
 
-    li:before {
+    li:not(#waline-comment ul li):before {
       content: '►';
       position: absolute;
       left: -20px;
