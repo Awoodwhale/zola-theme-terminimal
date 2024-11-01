@@ -5,6 +5,7 @@
 {% import "macros/title.html" as title_macros -%}
 {% import "macros/comment.html" as comment_macros -%}
 {% import "macros/cdn.html" as cdn_macros -%}
+{% import "macros/pjax.html" as pjax_macros -%}
 
 <!DOCTYPE html>
 <html lang="{%- if config.default_language -%}{{ config.default_language }}{%- else -%}en{%- endif -%}">
@@ -70,6 +71,8 @@
     </header>
     {% endblock header %}
 
+    <div class="toc-container"><div class="toc"></div></div>
+    
     <div class="content">
         {% block content %}
         <div class="posts">
@@ -130,6 +133,7 @@
                 </div>
             {% endif -%}
         </div>
+        {{ pjax_macros::pjax() }}
     </footer>
     {% endblock footer %}
 

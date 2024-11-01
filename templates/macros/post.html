@@ -22,15 +22,12 @@
         </div>
     {% else %}
         {#- full content -#}
-        <div class="toc-container"><div class="toc"></div></div>
         {%- if page.extra.ai %}
             {{ ai_summary_macros::ai_summary(src=page.extra.ai.src, update=page.extra.ai.update, model=page.extra.ai.model)}}
         {%- endif %}
         <div class="post-content" id="uniq-post-content" data-pagefind-body>
             {{ page.content | safe }}
         </div>
-        <script src='{{ get_url(path="js/main.js") }}'></script>
-        <script src='{{ get_url(path="js/codeblock.js") }}'></script>
     {%- endif %}
 {% endmacro content %}
 

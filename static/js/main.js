@@ -1,28 +1,30 @@
-tocbot.init({
-    tocSelector: '.toc',
-    contentSelector: '.post-content',
-    headingSelector: 'h1, h2, h3, h4, h5',
-    positionFixedSelector: ".toc",
-    scrollEndCallback: (_) => {
-        const active = document.querySelector('.is-active-link')
-        active && active.scrollIntoView({ behavior: 'auto', block: 'nearest' })
+topbar.config({
+    barColors: {
+        '0': 'rgba(27, 192, 128, 0.75)',
+        '1.0': 'rgba(27, 192, 128, 1)'
     }
 })
-new Viewer(document.getElementById('uniq-post-content'), {
-    navbar: false,
-    loop: false,
-    title: false,
+import('./player.js').then(({ MetingJSElementHooked }) => {
+    if (window.customElements && !window.customElements.get('meting-js-hooked')) {
+        window.customElements.define('meting-js-hooked', MetingJSElementHooked)
+    }
 })
-const content = document.getElementById('uniq-summary-content')
-const chevron = document.querySelector('.summary-chevron')
-function toggleSummary() {
-    chevron.classList.contains('rotated') ? collapseSummary() : expandSummary()
+import('./crypto.js').then(({ aesDecrypt, decryptContent }) => {
+    if (!window.aesDecrypt) window.aesDecrypt = aesDecrypt
+    if (!window.decryptContent) window.decryptContent = decryptContent
+})
+const complete = () => {
+    import('./article.js').then(({ initTocAndViewer, toggleAISummary }) => {
+        initTocAndViewer()
+        if (!window.toggleSummary) window.toggleSummary = toggleAISummary
+    })
+    import('./codeblock.js').then(({ initCodeBlock }) => initCodeBlock())
+    topbar.hide()
 }
-function expandSummary() {
-    content.style.height = `${content.scrollHeight}px`
-    chevron.classList.add('rotated')
+const send = () => {
+    tocbot.destroy()
+    topbar.show()
 }
-function collapseSummary() {
-    content.style.height = '0'
-    chevron.classList.remove('rotated')
-}
+document.addEventListener('DOMContentLoaded', complete)
+document.addEventListener('pjax:complete', complete)
+document.addEventListener('pjax:send', send)

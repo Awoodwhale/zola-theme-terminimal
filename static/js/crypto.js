@@ -1,4 +1,4 @@
-function aesDecrypt(data, key) {
+export const aesDecrypt = (data, key) => {
     if (key.length > 32) key = key.slice(0, 32)
     const cypherKey = CryptoJS.enc.Utf8.parse(key)
     CryptoJS.pad.ZeroPadding.pad(cypherKey, 4)
@@ -8,7 +8,7 @@ function aesDecrypt(data, key) {
     return decrypted.toString(CryptoJS.enc.Utf8)
 }
 
-function decryptContent(hash) {
+export const decryptContent = (hash) => {
     const pwd = document.getElementById(`pwd-${hash}`).value
     const data = document.getElementById(`data-${hash}`).value
     if (!pwd || !data) return
