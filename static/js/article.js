@@ -1,5 +1,5 @@
-export const initTocAndViewer = () => {
-    const content = document.getElementById('uniq-post-content')
+export const initTocAndViewer = (name = 'uniq-post-content') => {
+    const content = document.getElementById(name)
     if (!content) return
     initToc(content)
     initViewer(content)

@@ -4,21 +4,35 @@ topbar.config({
         '1.0': 'rgba(27, 192, 128, 1)'
     }
 })
-import('./player.js').then(({ MetingJSElementHooked }) => {
-    if (window.customElements && !window.customElements.get('meting-js-hooked')) {
-        window.customElements.define('meting-js-hooked', MetingJSElementHooked)
-    }
-})
-import('./crypto.js').then(({ aesDecrypt, decryptContent }) => {
-    if (!window.aesDecrypt) window.aesDecrypt = aesDecrypt
-    if (!window.decryptContent) window.decryptContent = decryptContent
-})
 const complete = () => {
-    import('./article.js').then(({ initTocAndViewer, toggleAISummary }) => {
-        initTocAndViewer()
-        if (!window.toggleSummary) window.toggleSummary = toggleAISummary
-    })
-    import('./codeblock.js').then(({ initCodeBlock }) => initCodeBlock())
+    if (!window.initTocAndViewer || !window.toggleSummary) {
+        import('./article.js').then(({ initTocAndViewer, toggleAISummary }) => {
+            window.initTocAndViewer = initTocAndViewer
+            window.toggleSummary = toggleAISummary
+            initTocAndViewer()
+        })
+    }
+    if (!window.decryptContent) {
+        import('./crypto.js').then(({ decryptContent }) => {
+            window.decryptContent = decryptContent
+        })
+    }
+    if (!window.initCodeBlock) {
+        import('./codeblock.js').then(({ initCodeBlock }) => {
+            if (!window.initCodeBlock) window.initCodeBlock = initCodeBlock
+            initCodeBlock()
+        })
+    }
+    if (!window.MetingJSElementHooked) {
+        import('./player.js').then(({ MetingJSElementHooked }) => {
+            if (window.customElements && !window.customElements.get('meting-js-hooked')) {
+                window.MetingJSElementHooked = MetingJSElementHooked
+                window.customElements.define('meting-js-hooked', MetingJSElementHooked)
+            }
+        })
+    }
+    window.initTocAndViewer && window.initTocAndViewer()
+    window.initCodeBlock && window.initCodeBlock()
     topbar.hide()
 }
 const send = () => {

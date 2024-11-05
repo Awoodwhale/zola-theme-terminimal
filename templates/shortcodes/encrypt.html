@@ -1,5 +1,5 @@
 {% if src %}
-{% set data = load_data(path="encrypt/" ~ src) %}
+{% set data = load_data(path="encrypt-public/" ~ src) %}
 {% set hash = get_hash(literal=src, sha_type=256) %}
 
 <div id="secret-content-{{ hash }}" class="secret-content-div">
