@@ -5,7 +5,7 @@ export const initTocAndViewer = (name = 'uniq-post-content') => {
 const initToc = () => {
     tocbot.init({
         tocSelector: '.toc',
-        contentSelector: 'uniq-post-content',
+        contentSelector: '#uniq-post-content',
         headingSelector: 'h1, h2, h3, h4, h5',
         hasInnerContainers: true,
         positionFixedSelector: ".toc",
