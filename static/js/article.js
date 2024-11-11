@@ -1,13 +1,11 @@
 export const initTocAndViewer = (name = 'uniq-post-content') => {
-    const content = document.getElementById(name)
-    if (!content) return
-    initToc(content)
-    initViewer(content)
+    initToc()
+    initViewer(name)
 }
-const initToc = (content) => {
+const initToc = () => {
     tocbot.init({
         tocSelector: '.toc',
-        contentElement: content,
+        contentSelector: 'uniq-post-content',
         headingSelector: 'h1, h2, h3, h4, h5',
         hasInnerContainers: true,
         positionFixedSelector: ".toc",
@@ -17,7 +15,8 @@ const initToc = (content) => {
         }
     })
 }
-const initViewer = (content) => {
+const initViewer = (name) => {
+    const content = document.getElementById(name)
     if (!content) return
     new Viewer(content, {
         navbar: false,
@@ -25,7 +24,6 @@ const initViewer = (content) => {
         title: false,
     })
 }
-
 export const toggleAISummary = () => {
     const content = document.getElementById('uniq-summary-content')
     const chevron = document.querySelector('.summary-chevron')
