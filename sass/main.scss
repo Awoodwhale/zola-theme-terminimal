@@ -17,7 +17,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: Hack, DejaVu Sans Mono, Monaco, Consolas, Ubuntu Mono, monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
   font-size: 1rem;
   line-height: 1.54;
   background-color: var(--background);
@@ -122,8 +122,10 @@ figure {
 }
 
 code {
-  font-family: Hack, DejaVu Sans Mono, Monaco, Consolas, Ubuntu Mono, monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
   font-feature-settings: normal;
+  font-variant-ligatures: contextual;
+  font-feature-settings: "calt" 1, "liga" 1;
   background: var(--accent-alpha-20);
   padding: 1px 6px;
   margin: 0 2px;
@@ -131,10 +133,12 @@ code {
 }
 
 pre {
-  font-family: Hack, DejaVu Sans Mono, Monaco, Consolas, Ubuntu Mono, monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
   padding: 20px;
   font-size: .95rem;
   overflow: auto;
+  font-variant-ligatures: contextual;
+  font-feature-settings: "calt" 1, "liga" 1;
   border-top: 1px solid rgba(255, 255, 255, .1);
   border-bottom: 1px solid rgba(255, 255, 255, .1);
   border-radius: 5px;

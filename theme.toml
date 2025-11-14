@@ -41,11 +41,6 @@ enable_post_view_navigation = true
 # before earlier/later post links.
 post_view_navigation_prompt = "Thanks for reading! Read other posts?"
 
-# Use full Hack character set, not just a subset.
-# Switch this to true if you need full unicode support.
-# Defaults to false.
-use_full_hack_font = false
-
 # Friend links config
 # [[extra.links]]
 # tag = "coder"
