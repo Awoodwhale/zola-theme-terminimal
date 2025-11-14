@@ -1,3 +1,10 @@
 .idea/
 public
 
+zola.exe
+zola.elf
+zola
+.DS_Store
+node_modules/
+package*.json
+AGENTS.md
