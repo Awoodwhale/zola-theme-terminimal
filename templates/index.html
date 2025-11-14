@@ -95,6 +95,14 @@
             {% endfor -%}
             <div class="pagination">
                 <div class="pagination__buttons">
+                {%- if paginator and paginator.number_pagers and paginator.number_pagers > 1 and paginator.current_index > 1 %}
+                    <span class="button first">
+                        <a href="{{ paginator.first | safe }}">
+                            <span class="button__icon">«</span>&nbsp;
+                            <span class="button__text">First</span>
+                        </a>
+                    </span>
+                {% endif -%}
                 {%- if paginator.previous %}
                     <span class="button previous">
                         <a href="{{ paginator.previous | safe }}">
@@ -103,11 +111,55 @@
                         </a>
                     </span>
                 {% endif -%}
+                {%- if paginator and paginator.number_pagers and paginator.number_pagers > 1 %}
+                    {%- set total_pagers = paginator.number_pagers -%}
+                    {%- set max_display = 5 -%}
+                    {%- set start_page = paginator.current_index - 2 -%}
+                    {%- if start_page < 1 -%}
+                        {%- set start_page = 1 -%}
+                    {%- endif -%}
+                    {%- set end_page = start_page + max_display - 1 -%}
+                    {%- if end_page > total_pagers -%}
+                        {%- set end_page = total_pagers -%}
+                        {%- set start_page = end_page - max_display + 1 -%}
+                        {%- if start_page < 1 -%}
+                            {%- set start_page = 1 -%}
+                        {%- endif -%}
+                    {%- endif -%}
+                    <div class="pagination__pages" aria-label="分页列表">
+                    {%- for page_number in range(start=start_page, end=end_page + 1) %}
+                        {%- if page_number == 1 %}
+                            {%- set page_link = paginator.first -%}
+                        {% else %}
+                            {%- set page_link = paginator.base_url ~ page_number ~ "/" -%}
+                        {% endif -%}
+                        {% if page_number == paginator.current_index %}
+                            <span class="button page-number is-active" aria-current="page">
+                                <span class="button__text">{{ page_number }}</span>
+                            </span>
+                        {% else %}
+                            <span class="button page-number">
+                                <a href="{{ page_link | safe }}" aria-label="第 {{ page_number }} 页">
+                                    <span class="button__text">{{ page_number }}</span>
+                                </a>
+                            </span>
+                        {% endif -%}
+                    {% endfor -%}
+                    </div>
+                {% endif -%}
                 {%- if paginator.next %}
                     <span class="button next">
                         <a href="{{ paginator.next | safe }}">
                             <span class="button__text">Next</span>&nbsp;
                             <span class="button__icon">→</span>
+                        </a>
+                    </span>
+                {% endif -%}
+                {%- if paginator and paginator.number_pagers and paginator.number_pagers > 1 and paginator.current_index < paginator.number_pagers %}
+                    <span class="button last">
+                        <a href="{{ paginator.last | safe }}">
+                            <span class="button__text">Last</span>&nbsp;
+                            <span class="button__icon">»</span>
                         </a>
                     </span>
                 {% endif -%}

@@ -1,7 +1,7 @@
 @import 'variables';
 
 .pagination {
-  margin-top: 50px;
+  margin-top: 40px;
 
   &__title {
     display: flex;
@@ -38,6 +38,23 @@
     @media (max-width: $phone-max-width) {
       flex-direction: column;
     }
+
+    .button a {
+      padding: 8px;
+      text-decoration: none;
+    }
+  }
+
+  &__pages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 15px;
+
+    .button {
+      max-width: none;
+    }
   }
 }
 
@@ -57,7 +74,7 @@
     max-width: 80%;
   }
 
-  + .button {
+  +.button {
     margin-left: 10px;
   }
 
@@ -73,5 +90,29 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  &.page-number {
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+
+    :hover {
+      text-decoration: underline;
+    }
+
+    &.is-active {
+      padding: 8px;
+      background: var(--accent-alpha-20, rgba(27, 192, 128, 0.2));
+      color: var(--accent);
+    }
+
+    &+.page-number {
+      margin-left: 0;
+    }
+
+    .button__text {
+      color: inherit;
+    }
   }
 }
