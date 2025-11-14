@@ -28,13 +28,23 @@ export const toggleAISummary = () => {
     const content = document.getElementById('uniq-summary-content')
     const chevron = document.querySelector('.summary-chevron')
     if (!content || !chevron) return
-    chevron.classList.contains('rotated') ? collapseSummary(content, chevron) : expandSummary(content, chevron)
+    const currentState = content.dataset.state
+    const isExpanded = currentState
+        ? currentState === 'expanded'
+        : window.getComputedStyle(content).height !== '0px'
+    isExpanded ? collapseSummary(content, chevron) : expandSummary(content, chevron)
 }
 const expandSummary = (content, chevron) => {
     content.style.height = `${content.scrollHeight}px`
-    chevron.classList.add('rotated')
+    content.dataset.state = 'expanded'
+    chevron.classList.remove('rotated')
 }
 const collapseSummary = (content, chevron) => {
-    content.style.height = '0'
-    chevron.classList.remove('rotated')
+    const currentHeight = content.scrollHeight
+    content.style.height = `${currentHeight}px`
+    requestAnimationFrame(() => {
+        content.style.height = '0'
+    })
+    content.dataset.state = 'collapsed'
+    chevron.classList.add('rotated')
 }

@@ -33,6 +33,15 @@ const safeSet = value => {
 
 const systemPreference = () => (mediaQuery && mediaQuery.matches ? 'dark' : 'light');
 
+const emitThemeChange = theme => {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    document.dispatchEvent(new CustomEvent('terminimal:theme-change', {
+        detail: { theme }
+    }));
+};
+
 const reflect = theme => {
     if (!toggleEl) {
         return;
@@ -53,6 +62,7 @@ const applyTheme = (theme, options = {}) => {
         safeSet(theme);
     }
     reflect(theme);
+    emitThemeChange(theme);
 };
 
 const handleToggle = () => {
@@ -87,6 +97,7 @@ const handleSystemChange = event => {
     }
     if (!root.dataset.theme) {
         reflect(event.matches ? 'dark' : 'light');
+        emitThemeChange(event.matches ? 'dark' : 'light');
     }
 };
 
@@ -94,6 +105,7 @@ const primeThemePreference = () => {
     const stored = safeGet();
     if (stored === 'dark' || stored === 'light') {
         root.dataset.theme = stored;
+        emitThemeChange(stored);
     }
 };
 

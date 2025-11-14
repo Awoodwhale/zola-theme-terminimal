@@ -1,9 +1,34 @@
-topbar.config({
-    barColors: {
-        '0': 'rgba(27, 192, 128, 0.75)',
-        '1.0': 'rgba(27, 192, 128, 1)'
+const root = document.documentElement
+const defaultTopbarColors = {
+    '0': 'rgba(27, 192, 128, 0.75)',
+    '1.0': 'rgba(27, 192, 128, 1)'
+}
+
+const getCssVar = (name) => {
+    if (!root) return ''
+    return window.getComputedStyle(root).getPropertyValue(name).trim()
+}
+
+const buildTopbarColors = () => {
+    const accent = getCssVar('--accent')
+    const accentSoft = getCssVar('--accent-alpha-70')
+    if (!accent) return defaultTopbarColors
+    return {
+        '0': accentSoft || accent,
+        '1.0': accent
     }
-})
+}
+
+const syncTopbarColors = () => {
+    if (typeof topbar === 'undefined' || typeof topbar.config !== 'function') return
+    topbar.config({
+        barColors: buildTopbarColors()
+    })
+}
+
+syncTopbarColors()
+
+document.addEventListener('terminimal:theme-change', syncTopbarColors)
 
 const themeToggleReady = import('./theme-toggle.js')
 
@@ -49,6 +74,7 @@ const complete = () => {
 }
 const send = () => {
     tocbot.destroy()
+    syncTopbarColors()
     topbar.show()
 }
 document.addEventListener('DOMContentLoaded', complete)
