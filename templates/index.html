@@ -126,7 +126,7 @@
                             {%- set start_page = 1 -%}
                         {%- endif -%}
                     {%- endif -%}
-                    <div class="pagination__pages" aria-label="分页列表">
+                    <div class="pagination__pages" aria-label="Pagination">
                     {%- for page_number in range(start=start_page, end=end_page + 1) %}
                         {%- if page_number == 1 %}
                             {%- set page_link = paginator.first -%}
@@ -139,7 +139,7 @@
                             </span>
                         {% else %}
                             <span class="button page-number">
-                                <a href="{{ page_link | safe }}" aria-label="第 {{ page_number }} 页">
+                                <a href="{{ page_link | safe }}" aria-label="{{ page_number }} page">
                                     <span class="button__text">{{ page_number }}</span>
                                 </a>
                             </span>
@@ -194,6 +194,12 @@
     {% endblock footer %}
 
 </div>
+
+<button type="button" class="back-to-top" aria-label="Back to top">
+    <span class="back-to-top__chevron" aria-hidden="true">
+        <i class="fas fa-chevron-up"></i>
+    </span>
+</button>
 {%- block extra_body %}
 {% endblock extra_body -%}
 </body>

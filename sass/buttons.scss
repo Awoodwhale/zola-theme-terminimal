@@ -1,3 +1,5 @@
+@import "variables";
+
 .button-container {
   display: table;
   margin-left: auto;
@@ -88,5 +90,58 @@ a.read-more:active {
     appearance: none;
     cursor: pointer;
     outline: none;
+  }
+}
+
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent-alpha-70);
+  color: var(--background);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, .25);
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease, background-color .2s ease;
+  z-index: 20;
+
+  &:hover {
+    background: var(--accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--background);
+    outline-offset: 3px;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @media (max-width: $phone-max-width) {
+    right: 16px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+.back-to-top__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+
+  .fas,
+  .fa {
+    line-height: 1;
   }
 }
