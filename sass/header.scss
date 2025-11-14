@@ -58,7 +58,6 @@
 
         &:not(:last-of-type) {
           margin-right: 20px;
-          margin-bottom: 10px;
           flex: 0 0 auto;
         }
       }
@@ -92,5 +91,46 @@
         }
       }
     }
+  }
+
+  .theme-switch {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color);
+    cursor: pointer;
+    list-style: none;
+    padding: 0;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--accent);
+    }
+
+    &:focus-visible {
+      outline-style: dashed;
+    }
+
+    &:active {
+      transform: scale(.95);
+    }
+  }
+
+  .theme-switch__icon {
+    display: block;
+    line-height: 1;
+    transition: transform .3s ease;
+  }
+  .theme-switch .theme-switch__icon {
+    transform: rotate(45deg);
+  }
+  .theme-switch:hover .theme-switch__icon,
+  .theme-switch:focus-visible .theme-switch__icon {
+    transform: rotate(225deg);
   }
 }

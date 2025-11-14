@@ -4,6 +4,17 @@ topbar.config({
         '1.0': 'rgba(27, 192, 128, 1)'
     }
 })
+
+const themeToggleReady = import('./theme-toggle.js')
+
+const bootThemeToggle = () => {
+    themeToggleReady.then(({ initThemeToggle }) => {
+        if (typeof initThemeToggle === 'function') {
+            initThemeToggle()
+        }
+    })
+}
+
 const complete = () => {
     if (!window.initTocAndViewer || !window.toggleSummary) {
         import('./article.js').then(({ initTocAndViewer, toggleAISummary }) => {
@@ -34,6 +45,7 @@ const complete = () => {
     window.initTocAndViewer && window.initTocAndViewer()
     window.initCodeBlock && window.initCodeBlock()
     topbar.hide()
+    bootThemeToggle()
 }
 const send = () => {
     tocbot.destroy()

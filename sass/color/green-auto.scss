@@ -7,7 +7,7 @@
     --background: #101010;
     --color: #f0f0f0;
     --border-color: rgba(255,240,224,.125);
-    
+
     div.logo {
       color: black;
     }
@@ -21,9 +21,37 @@
     --background: white;
     --color: #201030;
     --border-color: rgba(0,0,16,.125);
-    
+
     div.logo {
       color: white;
     }
   }
+}
+
+html[data-theme="dark"] {
+  --accent: rgb(120,226,160);
+  --accent-alpha-70: rgba(120,226,160,.7);
+  --accent-alpha-20: rgba(120,226,160,.2);
+
+  --background: #101010;
+  --color: #f0f0f0;
+  --border-color: rgba(255,240,224,.125);
+}
+
+html[data-theme="dark"] .logo {
+  color: black;
+}
+
+html[data-theme="light"] {
+  --accent: rgb(24, 192, 128);
+  --accent-alpha-70: rgba(24, 192, 128,.7);
+  --accent-alpha-20: rgba(24, 192, 128,.2);
+
+  --background: white;
+  --color: #201030;
+  --border-color: rgba(0,0,16,.125);
+}
+
+html[data-theme="light"] .logo {
+  color: white;
 }
