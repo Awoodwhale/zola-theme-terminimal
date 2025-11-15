@@ -86,7 +86,8 @@ const initThemeToggle = () => {
     if (stored === 'dark' || stored === 'light') {
         applyTheme(stored, { persist: false });
     } else {
-        reflect(root.dataset.theme || systemPreference());
+        root.dataset.theme = systemPreference()
+        reflect(root.dataset.theme);
     }
 };
 
