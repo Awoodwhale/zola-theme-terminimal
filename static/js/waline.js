@@ -1,10 +1,8 @@
-const WALINE_CDN = 'https://unpkg.com/@waline/client@v3/dist/waline.js'
-const WALINE_CONTAINER_ID = 'waline-comment'
 let walineLoader
 let walineInstance
 
 const loadWaline = () => {
-    if (!walineLoader) walineLoader = import(WALINE_CDN)
+    if (!walineLoader) walineLoader = import('https://unpkg.com/@waline/client@v3/dist/waline.js')
     return walineLoader
 }
 
@@ -14,6 +12,7 @@ const destroyWaline = () => {
 }
 
 const initWaline = () => {
+    const WALINE_CONTAINER_ID = 'waline-comment'
     if (!document.getElementById(WALINE_CONTAINER_ID)) {
         destroyWaline()
         return
