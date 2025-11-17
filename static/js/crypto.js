@@ -11,7 +11,7 @@ export const decryptContent = (hash) => {
     const pwd = document.getElementById(`pwd-${hash}`).value
     const data = document.getElementById(`data-${hash}`).value
     if (!pwd || !data) return
-    loadJs('https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js').then(() => {
+    loadJs('https://unpkg.com/crypto-js@4.2.0/crypto-js.js').then(() => {
         let res = undefined
         try {
             const _res = aesDecrypt(data, pwd)
@@ -28,7 +28,7 @@ export const decryptContent = (hash) => {
         }
         alertify.success('解密成功')
         document.getElementById(`secret-content-${hash}`).remove()
-        loadJs('https://cdnjs.cloudflare.com/ajax/libs/marked/14.1.3/marked.min.js').then(() => {
+        loadJs('https://unpkg.com/marked@15.0.12/marked.min.js').then(() => {
             const id = `decrypted-content-${hash}`
             const contianer = document.getElementById(id)
             contianer.innerHTML += marked.parse(res)
