@@ -5,3 +5,35 @@ html[data-theme="dark"] {
   --pagefind-ui-border: #152028;
   --pagefind-ui-tag: #152028;
 }
+
+.search-container--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 0;
+  color: var(--color);
+  width: 100%;
+  text-align: center;
+}
+
+.search-loading__spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--accent-alpha-20, rgba(35, 176, 255, .2));
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: search-loading-spin .9s linear infinite;
+}
+
+@keyframes search-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

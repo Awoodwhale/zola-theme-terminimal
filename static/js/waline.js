@@ -1,25 +1,15 @@
-let walineLoader
-let walineInstance
-
-const loadWaline = () => {
-    if (!walineLoader) walineLoader = import('https://unpkg.com/@waline/client@v3/dist/waline.js')
-    return walineLoader
-}
-
-const destroyWaline = () => {
-    if (walineInstance && typeof walineInstance.destroy === 'function') walineInstance.destroy()
-    walineInstance = null
-}
-
 const initWaline = () => {
+    let walineInstance = null
     const WALINE_CONTAINER_ID = 'waline-comment'
     if (!document.getElementById(WALINE_CONTAINER_ID)) {
         destroyWaline()
         return
     }
-    loadWaline()
+    import('https://unpkg.com/@waline/client@v3/dist/waline.js')
         .then(({ init }) => {
-            destroyWaline()
+            if (walineInstance !== null) {
+                walineInstance.destroy()
+            }
             walineInstance = init({
                 el: `#${WALINE_CONTAINER_ID}`,
                 path: window.location.pathname.replace(/\/$/, ''),

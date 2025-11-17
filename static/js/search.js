@@ -10,14 +10,16 @@ if (!window.loadPagefindJs) window.loadPagefindJs = (callback) => {
 
 if (!window.initPagefind) window.initPagefind = (container) => {
     container.innerHTML = ""
+    container.classList.remove("search-container--loading")
     new PagefindUI({ 
         element: "#search-container", 
         showSubResults: true,
         showEmptyFilters: false,
         resetStyles: true,
         pageSize: 5,
-        autofocus: true,
+        autofocus: false,
         showImages: false,
+        openFilters: ['tags'],
         translations: {
             placeholder: "要搜点什么呢？",
             clear_search: "清空",
