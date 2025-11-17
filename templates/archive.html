@@ -6,10 +6,8 @@
 
 {% block content %}
     <div class="post">
+        {%- set section = get_section(path="_index.md") -%}
         <h1 class="post-title"><b>{{ page.title }}</b></h1>
-
-        {% set section = get_section(path="_index.md") %}
-
-        {{ post_macros::list_posts(pages=section.pages) }}
+        {{ archive_macros::archive_list(pages=section.pages) }}
     </div>
 {% endblock content %}

@@ -1,0 +1,26 @@
+{% macro archive_list(pages) %}
+    {%- if pages and pages | length > 0 %}
+        {%- set sorted_pages = pages | sort(attribute="date") | reverse -%}
+        {%- set current_year = "" -%}
+        {%- for page in sorted_pages %}
+            {%- set page_year = page.year | default(value=page.date | date(format="%Y")) -%}
+            {%- if loop.first or page_year != current_year %}
+                {%- if not loop.first %}
+                    </ul>
+                {% endif -%}
+                <h2 class="archive-year">{{ page_year }}</h2>
+                <ul class="archive-posts">
+            {%- endif -%}
+            <li class="post-list">
+                <a href="{{ page.permalink | safe }}">
+                    <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+                    :: <span class="post-list-title">{{ page.title }}</span></a>
+                {{ post_macros::tags(page=page, short=true) }}
+            </li>
+            {%- set_global current_year = page_year -%}
+            {%- if loop.last %}
+                </ul>
+            {% endif -%}
+        {% endfor -%}
+    {% endif -%}
+{% endmacro archive_list %}
