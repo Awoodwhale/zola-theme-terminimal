@@ -2,14 +2,12 @@ const initWaline = () => {
     let walineInstance = null
     const WALINE_CONTAINER_ID = 'waline-comment'
     if (!document.getElementById(WALINE_CONTAINER_ID)) {
-        destroyWaline()
+        if (walineInstance !== null) walineInstance.destroy()
         return
     }
     import('https://unpkg.com/@waline/client@v3/dist/waline.js')
         .then(({ init }) => {
-            if (walineInstance !== null) {
-                walineInstance.destroy()
-            }
+            if (walineInstance !== null) walineInstance.destroy()
             walineInstance = init({
                 el: `#${WALINE_CONTAINER_ID}`,
                 path: window.location.pathname.replace(/\/$/, ''),
@@ -39,7 +37,7 @@ const bootstrapWaline = () => {
 
 document.addEventListener('DOMContentLoaded', bootstrapWaline)
 document.addEventListener('pjax:complete', bootstrapWaline)
-document.addEventListener('pjax:send', destroyWaline)
+document.addEventListener('pjax:send', () => { if (walineInstance !== null) walineInstance.destroy() })
 
 // attempt initial mount for already loaded DOM
 if (document.readyState === 'complete' || document.readyState === 'interactive') bootstrapWaline()

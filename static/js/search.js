@@ -45,3 +45,4 @@ document.getElementById('search-container').addEventListener('click', (e) => {
         pjax.loadUrl(e.target.getAttribute('href'))
     }
 })
+if (document.readyState === 'complete' || document.readyState === 'interactive') window.initSearch()

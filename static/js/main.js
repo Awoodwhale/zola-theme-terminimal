@@ -117,3 +117,4 @@ const send = () => {
 document.addEventListener('DOMContentLoaded', complete)
 document.addEventListener('pjax:complete', complete)
 document.addEventListener('pjax:send', send)
+if (document.readyState === 'complete' || document.readyState === 'interactive') complete()
