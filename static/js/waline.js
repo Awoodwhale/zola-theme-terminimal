@@ -1,16 +1,15 @@
-const initWaline = () => {
-    let walineInstance = null
-    const WALINE_CONTAINER_ID = 'waline-comment'
-    if (!document.getElementById(WALINE_CONTAINER_ID)) {
-        if (walineInstance !== null) walineInstance.destroy()
+if (!window.initWaline) window.initWaline = () => {
+    if (!document.getElementById('waline-comment')) {
+        if (window.walineInstance !== null) {
+            window.walineInstance.destroy()
+            window.walineInstance = null
+        }
         return
     }
     import('https://unpkg.com/@waline/client@v3/dist/waline.js')
         .then(({ init }) => {
-            if (walineInstance !== null) walineInstance.destroy()
-            walineInstance = init({
-                el: `#${WALINE_CONTAINER_ID}`,
-                path: window.location.pathname.replace(/\/$/, ''),
+            window.walineInstance = init({
+                el: '#waline-comment',
                 serverURL: 'https://waline-comment.woodwhale.cn',
                 lang: 'zh-CN',
                 locale: {
@@ -24,6 +23,7 @@ const initWaline = () => {
                     'https://unpkg.com/@waline/emojis@1.2.0/tieba',
                 ],
                 dark: 'html[data-theme="dark"]',
+                imageUploader: false,
             })
         })
         .catch((error) => {
@@ -31,13 +31,6 @@ const initWaline = () => {
         })
 }
 
-const bootstrapWaline = () => {
-    requestAnimationFrame(initWaline)
-}
-
-document.addEventListener('DOMContentLoaded', bootstrapWaline)
-document.addEventListener('pjax:complete', bootstrapWaline)
-document.addEventListener('pjax:send', () => { if (walineInstance !== null) walineInstance.destroy() })
-
-// attempt initial mount for already loaded DOM
-if (document.readyState === 'complete' || document.readyState === 'interactive') bootstrapWaline()
+document.addEventListener('DOMContentLoaded', () => requestAnimationFrame(window.initWaline))
+document.addEventListener('pjax:complete', () => requestAnimationFrame(window.initWaline))
+if (document.readyState === 'complete' || document.readyState === 'interactive') requestAnimationFrame(window.initWaline)
